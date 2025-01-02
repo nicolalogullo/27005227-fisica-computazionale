@@ -11,3 +11,4 @@ Hey...here are the commands
 ``` cd .. ```
 ### Linux
 ``` better choice ```
+{-}
