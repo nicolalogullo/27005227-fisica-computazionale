@@ -1,1 +1,2 @@
-# 0733-fisica-computazionale
+# Fisica Computazionale
+# Corso di laurea in Informatica
