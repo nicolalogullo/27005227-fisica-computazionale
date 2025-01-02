@@ -2,13 +2,8 @@
 
 Benvenuti al corso di Fisica Computazionale per il corso di Laurea in Informatica dell'Università della Calabria.
 
+Questo corso è strutturato per insegnare elementi di fisica classica utilizzando python.
 
-## Crea l'ambiente python {.tabset}
 
-### Windows
-Hey...here are the commands
+## Creare un ambiente python
 
-``` cd .. ```
-### Linux
-``` better choice ```
-{-}
