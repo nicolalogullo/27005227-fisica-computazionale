@@ -62,3 +62,24 @@ def da_cartesiane_a_polari(v):
         return
     
     return v_modulo, v_angolo
+
+
+def algoritmo_bisezione(f, x1, x2, risoluzione=0.001, verbose=False):    # f è una funzione!
+    # alcune accortezze
+    if x2 <= x1:
+        print('x2 must be greater than x1')
+        return
+    elif f(x1)*f(x2) >= 0:
+        print('f(x1) and f(x2) must have opposite signs')
+        return
+    else:
+        xm = (x1+x2)/2
+        while x2-x1 > risoluzione:
+            if verbose:
+                print(x1,x2)            # scommenta per stampare le varie iterazioni
+            xm = (x1+x2)/2
+            if f(xm)*f(x1) >= 0:
+                x1 = xm
+            else:
+                x2 = xm
+        return xm
