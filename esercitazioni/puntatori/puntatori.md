@@ -43,7 +43,7 @@ La Memoria del tuo Computer:
 | Sezione Codice | Istruzioni |
 | Sezione Dati | Variabili globali e statiche |
 | Stack | Variabili locali\/ chiamate a funzioni |
-|  Heap | Memoria dinamica (new\/malloc) |
+| Heap | Memoria dinamica (new\/malloc) |
 
 
 Ogni cella di memoria ha:
@@ -186,6 +186,89 @@ int main() {
     cout << "  Dopo *ptr = 100:" << endl;
     cout << "  voto = " << voto << " (variabile originale cambiata!)" << endl;
     cout << "  *ptr = " << *ptr << " (il puntatore mostra lo stesso valore)" << endl;
+
+    return 0;
+}
+
+```
+
+
+### 4. Puntatori Nulli
+
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "=== PUNTATORI NULLI - PUNTATORI SICURI ===" << endl;
+
+    // Diversi modi per creare puntatori nulli
+    int* ptr1 = nullptr;  // C++ moderno (raccomandato)
+    int* ptr2 = NULL;     // Vecchio stile C
+    int* ptr3 = 0;        // Anche valido
+
+    cout << "ptr1 (nullptr): " << ptr1 << endl;
+    cout << "ptr2 (NULL): " << ptr2 << endl;
+    cout << "ptr3 (0): " << ptr3 << endl;
+    cout << "Tutti puntano all'indirizzo 0 (indirizzo nullo speciale)" << endl;
+    cout << endl;
+
+    // Perché usare puntatori nulli?
+    cout << "Perché i puntatori nulli sono importanti:" << endl;
+    cout << "1. Indicano che il puntatore non punta a memoria valida" << endl;
+    cout << "2. Possono essere controllati prima dell'uso" << endl;
+    cout << "3. Prevengono l'accesso accidentale a memoria casuale" << endl;
+    cout << endl;
+
+    // Controllo sicuro
+    if (ptr1 == nullptr) {
+        cout << "✓ ptr1 è nullo - sicuro da controllare prima dell'uso" << endl;
+        cout << "  Controlla sempre se è nullo prima di dereferenziare!" << endl;
+    }
+
+    return 0;
+}
+
+```
+
+### 5. Puntatori Void
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "=== PUNTATORI VOID - PUNTATORI SENZA TIPO ===" << endl;
+
+    int numero = 42;
+    char lettera = 'Z';
+    double pi = 3.14159;
+
+    void* puntatoreGenerico;  // Può puntare a QUALSIASI tipo di dato
+
+    cout << "void* può memorizzare qualsiasi indirizzo, ma non conosce il tipo:" << endl;
+    cout << endl;
+
+    // Punta a int
+    puntatoreGenerico = &numero;
+    cout << "Punta a int (valore: " << numero << ")" << endl;
+    cout << "  Indirizzo memorizzato: " << puntatoreGenerico << endl;
+
+    // Deve fare il cast prima di dereferenziare
+    cout << "  Dopo il cast a int*: " << *(static_cast<int*>(puntatoreGenerico)) << endl;
+    cout << endl;
+
+    // Punta a char
+    puntatoreGenerico = &lettera;
+    cout << "Punta a char (valore: " << lettera << ")" << endl;
+    cout << "  Dopo il cast a char*: " << *(static_cast<char*>(puntatoreGenerico)) << endl;
+    cout << endl;
+
+    // Punta a double
+    puntatoreGenerico = &pi;
+    cout << "Punta a double (valore: " << pi << ")" << endl;
+    cout << "  Dopo il cast a double*: " << *(static_cast<double*>(puntatoreGenerico)) << endl;
 
     return 0;
 }
