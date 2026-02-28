@@ -40,10 +40,10 @@ La Memoria del tuo Computer:
 
 |Memoria|Funzione|
 |:---:|:---:|
-| Sezione Codice |Istruzioni |
-|Sezione Dati|Variabili globali e statiche|
-| Stack │ Variabili locali/chiamate a funzioni|
-|  Heap |Memoria dinamica (new/malloc)|
+| Sezione Codice | Istruzioni |
+| Sezione Dati | Variabili globali e statiche |
+| Stack │ Variabili locali/chiamate a funzioni |
+|  Heap | Memoria dinamica (new/malloc) |
 
 
 Ogni cella di memoria ha:
