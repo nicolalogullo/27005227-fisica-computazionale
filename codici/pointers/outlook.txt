@@ -1,0 +1,7 @@
+1. Definition of pointers
+2. Pointer arithmetics
+3. Pointer types
+4. Pointers as function arguments
+5. Pointers to arrays
+6. Dynamic allocation
+7. Pointers to functions
