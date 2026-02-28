@@ -1,8 +1,8 @@
 # Comprendere i Puntatori in C++ - Una Lezione Completa di 2 Ore
 
 ## Indice
-1. [Introduzione ai Puntatori (15 minuti)](#introduzione)
-2. [Basi dei Puntatori (25 minuti)](#basi)
+1. [Introduzione ai Puntatori (15 minuti)](#introduzione-ai-puntatori)
+2. [Basi dei Puntatori (25 minuti)](#basi-dei-puntatori)
 3. [Puntatori e Array (20 minuti)](#array)
 4. [Aritmetica dei Puntatori (15 minuti)](#aritmetica)
 5. [Puntatori e Funzioni (20 minuti)](#funzioni)
@@ -11,7 +11,7 @@
 
 ---
 
-## Introduzione ai Puntatori {#introduzione}
+## Introduzione ai Puntatori
 
 ### Cos'è un Puntatore? - Un'Analogia Semplice
 
@@ -62,7 +62,7 @@ Ogni cella di memoria ha:
 
 ---
 
-## Basi dei Puntatori {#basi}
+## Basi dei Puntatori
 
 ### 1. Dichiarare i Puntatori - Sintassi Spiegata
 
