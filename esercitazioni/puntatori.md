@@ -62,7 +62,7 @@ Ogni cella di memoria ha:
 
 ### 1. Dichiarare i Puntatori - Sintassi Spiegata
 
-```
+```cpp
 #include <iostream>
 using namespace std;
 
@@ -99,7 +99,7 @@ int main() {
 
 La "e commericale" (&) agisce come chiedere "Dove abiti?"
 
-```
+```cpp
 #include <iostream>
 using namespace std;
 
@@ -163,7 +163,7 @@ int main() {
 
 L'asterisco (\*) quando usato su un puntatore significa "vai a questo indirizzo e prendi il valore"
 
-```
+```cpp
 #include <iostream>
 using namespace std;
 
