@@ -38,8 +38,8 @@ I puntatori risolvono diverse sfide fondamentali della programmazione:
 
 La Memoria del tuo Computer:
 
-| Sezione Codice| Sezione Dati <br/>| Stack │  Heap |
-|---|
+| Sezione Codice| Sezione Dati| Stack │  Heap |
+|---| ---|---|---|
 
 Ogni cella di memoria ha:
 
