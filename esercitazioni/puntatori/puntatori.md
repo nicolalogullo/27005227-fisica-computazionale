@@ -713,3 +713,243 @@ int main() {
     return 0;
 }
 ```
+
+## Errori comuni e buone pratiche
+
+### 1. Dangling pointers
+
+```cpp
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "=== PUNTATORI PENDENTI: PUNTARE A MEMORIA LIBERATA ===" << endl;
+    
+    int* ptr1 = new int(42);
+    int* ptr2 = ptr1;  // Entrambi puntano alla stessa memoria
+    
+    cout << "Stato iniziale:" << endl;
+    cout << "  ptr1 = " << ptr1 << " punta a " << *ptr1 << endl;
+    cout << "  ptr2 = " << ptr2 << " punta a " << *ptr2 << endl;
+    cout << endl;
+    
+    cout << "Dopo aver cancellato ptr1:" << endl;
+    delete ptr1;
+    ptr1 = nullptr;  // Buono: impostato a null
+    cout << "  ptr1 = " << ptr1 << " (nullo, sicuro)" << endl;
+    cout << "  ptr2 = " << ptr2 << " (ha ancora il vecchio indirizzo!)" << endl;
+    cout << "  ptr2 è ora PENDENTE - punta a memoria liberata!" << endl;
+    
+    // Soluzione
+    cout << "\nSoluzione: Imposta TUTTI i puntatori a null dopo delete:" << endl;
+    ptr2 = nullptr;
+    cout << "  Ora entrambi sono null: ptr1=" << ptr1 << ", ptr2=" << ptr2 << endl;
+    
+    return 0;
+}
+```
+
+### 2. Memory leak
+```cpp
+#include <iostream>
+using namespace std;
+
+// Semplice rilevatore di leak (per scopi didattici)
+class RilevatoreLeak {
+private:
+    static int conteggioAllocazioni;
+    static int conteggioDeallocazioni;
+    
+public:
+    static void* alloca(size_t size, const char* file, int linea) {
+        void* ptr = malloc(size);
+        conteggioAllocazioni++;
+        cout << "  [+] Allocati " << size << " bytes a " << ptr << endl;
+        cout << "      in " << file << ":" << linea << endl;
+        return ptr;
+    }
+    
+    static void dealloca(void* ptr, const char* file, int linea) {
+        if(ptr) {
+            conteggioDeallocazioni++;
+            cout << "  [-] Liberata memoria a " << ptr << endl;
+            cout << "      in " << file << ":" << linea << endl;
+            free(ptr);
+        }
+    }
+    
+    static void report() {
+        cout << "\n=== REPORT LEAK ===" << endl;
+        cout << "  Allocazioni: " << conteggioAllocazioni << endl;
+        cout << "  Deallocazioni: " << conteggioDeallocazioni << endl;
+        if(conteggioAllocazioni > conteggioDeallocazioni) {
+            cout << "  ATTENZIONE: " << (conteggioAllocazioni - conteggioDeallocazioni) 
+                 << " memory leak rilevati!" << endl;
+        } else {
+            cout << "  ✓ Nessun leak rilevato" << endl;
+        }
+    }
+};
+
+int RilevatoreLeak::conteggioAllocazioni = 0;
+int RilevatoreLeak::conteggioDeallocazioni = 0;
+
+// Macro per tracciare le allocazioni
+#define NEW new(__FILE__, __LINE__)
+#define DELETE delete(__FILE__, __LINE__)
+
+// Overload di new e delete con tracciamento
+void* operator new(size_t size, const char* file, int linea) {
+    return RilevatoreLeak::alloca(size, file, linea);
+}
+
+void operator delete(void* ptr, const char* file, int linea) {
+    RilevatoreLeak::dealloca(ptr, file, linea);
+}
+
+void operator delete(void* ptr) noexcept {
+    RilevatoreLeak::dealloca(ptr, "unknown", 0);
+}
+
+int main() {
+    cout << "=== RILEVAMENTO MEMORY LEAK ===" << endl;
+    
+    // Buono: new/delete corrispondenti
+    cout << "\nEsempio corretto - pulizia appropriata:" << endl;
+    int* p1 = NEW int(42);
+    DELETE p1;
+    
+    // Cattivo: memory leak
+    cout << "\nEsempio errato - dimenticare di fare delete:" << endl;
+    int* p2 = NEW int(100);
+    // Dimenticato di fare delete p2!
+    
+    RilevatoreLeak::report();
+    
+    return 0;
+}
+```
+
+### 3. Pattern di uso sicuro dei puntatori
+
+```cpp
+#include <iostream>
+#include <memory>  // Per smart pointers
+using namespace std;
+
+int main() {
+    cout << "=== PATTERN DI PUNTATORI SICURI ===" << endl;
+
+    // Pattern 1: Inizializza sempre
+    cout << "Pattern 1: Inizializza sempre i puntatori" << endl;
+    int* ptr1 = nullptr;  // Buono
+    cout << "  ptr1 = " << ptr1 << " (sicuro da controllare)" << endl;
+    cout << endl;
+
+    // Pattern 2: Controlla prima di usare
+    cout << "Pattern 2: Controlla se è nullo prima di dereferenziare" << endl;
+    if(ptr1 != nullptr) {
+        cout << "  *ptr1 = " << *ptr1 << endl;
+    } else {
+        cout << "  ptr1 è nullo, salto la dereferenziazione" << endl;
+    }
+    cout << endl;
+
+    // Pattern 3: Imposta a null dopo delete
+    cout << "Pattern 3: Imposta a null dopo delete" << endl;
+    int* ptr3 = new int(42);
+    cout << "  ptr3 = " << ptr3 << " punta a " << *ptr3 << endl;
+    delete ptr3;
+    ptr3 = nullptr;  // Importante!
+    cout << "  Dopo delete e impostazione a null: " << ptr3 << endl;
+    cout << endl;
+
+    // Pattern 4: Usa smart pointers (C++ moderno)
+    cout << "Pattern 4: Usa smart pointers (C++11+)" << endl;
+    cout << "  Gli smart pointer cancellano automaticamente quando escono dallo scope" << endl;
+
+    {
+        unique_ptr<int> smartPtr = make_unique<int>(100);
+        cout << "  Dentro il blocco, smartPtr punta a " << *smartPtr << endl;
+        // Non serve fare delete - gestito automaticamente
+    }
+    cout << "  Fuori dal blocco, la memoria è automaticamente liberata" << endl;
+
+    return 0;
+}
+```
+
+## Cheat sheet
+
+CHEAT SHEET DEI PUNTATORI - CON SPIEGAZIONI
+
+DICHIARAZIONE:
+    int* ptr;           // Puntatore a int - memorizza l'indirizzo di un int
+    int** ptr2;         // Puntatore a puntatore - memorizza l'indirizzo di un int*
+
+    PERCHÉ: Il tipo dice al compilatore come interpretare la memoria a quell'indirizzo
+
+OPERATORI:
+    &x                  // Operatore "indirizzo di" - ottiene l'indirizzo di memoria di x
+    *ptr                // Operatore "dereferenziazione" - ottiene il valore all'indirizzo di ptr
+
+    int x = 5;
+    int* p = &x;        // p memorizza DOVE vive x
+    int y = *p;         // y ottiene COSA c'è all'indirizzo p (5)
+
+ARITMETICA DEI PUNTATORI:
+    ptr++               // Passa all'elemento successivo (aggiunge sizeof(tipo) bytes)
+    ptr + n             // Avanza di n elementi
+    ptr1 - ptr2         // Numero di elementi tra i puntatori
+
+    int arr[5] = {10,20,30,40,50};
+    int* p = arr;       // p punta a 10
+    p += 2;             // p ora punta a 30 (spostato di 2 * sizeof(int) bytes)
+
+MEMORIA DINAMICA:
+    new int             // Alloca un singolo int sullo heap, restituisce l'indirizzo
+    new int[10]         // Alloca un array di 10 int sullo heap
+    delete ptr          // Libera una singola allocazione
+    delete[] ptr        // Libera un array
+
+    PERCHÉ HEAP? Dimensione sconosciuta in compilazione, deve sopravvivere al ritorno della funzione
+
+ERRORI COMUNI:
+
+    1. Puntatore non inizializzato:
+       int* p;           // p contiene un indirizzo casuale
+       *p = 5;           // CRASH! Scrive in memoria casuale
+
+    2. Dereferenziare nullo:
+       int* p = nullptr;
+       *p = 5;           // CRASH! Non si può scrivere all'indirizzo 0
+
+    3. Memory leak:
+       int* p = new int(5);
+       p = new int(10);  // Prima allocazione persa per sempre!
+
+    4. Puntatore pendente:
+       int* p = new int(5);
+       int* q = p;
+       delete p;         // Memoria liberata
+       *q = 10;          // COMPORTAMENTO INDEFINITO! q punta a memoria liberata
+
+BUONE PRATICHE:
+
+    1. Inizializza sempre i puntatori
+       int* p = nullptr;  // Se non usato subito, mettilo a null
+
+    2. Controlla se è nullo prima di dereferenziare
+       if(p != nullptr) { *p = 5; }
+
+    3. Imposta a null dopo delete
+       delete p;
+       p = nullptr;
+
+    4. Abbina new con delete, new[] con delete[]
+       int* p = new int;    // Usa delete p
+       int* arr = new int[5]; // Usa delete[] arr
+
+    5. Usa smart pointers in C++ moderno
+       unique_ptr<int> p = make_unique<int>(5);
