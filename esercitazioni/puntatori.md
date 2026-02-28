@@ -37,15 +37,8 @@ I puntatori risolvono diverse sfide fondamentali della programmazione:
 ### Layout della Memoria - Il Quadro Generale
 
 La Memoria del tuo Computer:
-|---|
-| Sezione Codice <br/> |              ← Istruzioni del programma|
- (sola lettura) 
-|
-| Sezione Dati <br/>| ← Variabili globali/statiche
-| (dati inizializzati) |
-|---|
-| Stack │ ← Variabili locali (cresce verso il basso) <br/>(chiamate funzioni) 
-| Heap | ← Memoria dinamica (cresce verso l'alto)<br/> (new/malloc)
+
+| Sezione Codice| Sezione Dati <br/>| Stack │  Heap |
 |---|
 
 Ogni cella di memoria ha:
