@@ -10,7 +10,7 @@ Queste istruzioni sono prese da [qui](https://learn.microsoft.com/it-it/windows/
 
 - In generale dovrebbe bastare **eseguire come amministratore** il Prompt dei comandi e eseguire il comando
 
-´´´ wsl --install ´´´
+``` wsl --install ```
 
 - (Probabilmente non necessario) Aggiornare il kernel Linux scaricando e installando il pacchetto che si trova [qui](https://learn.microsoft.com/it-it/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)
 
@@ -18,14 +18,14 @@ Queste istruzioni sono prese da [qui](https://learn.microsoft.com/it-it/windows/
 
 Sempre dal prompt dei comandi eseguire il comando
 
-´´´ wsl --install -d ubuntu ´´´
+``` wsl --install -d ubuntu ```
 
 Procedere con la configurazione dell'account come richiesto nel terminale. Bisogna fornire un nome utente e una password.
 
 Procedere ora con un aggiornamento del sistema eseguendo i comandi
 
-´´´ sudo apt install update
-    sudo apt install upgrade ´´´
+``` sudo apt install update
+    sudo apt install upgrade ```
 
 
 

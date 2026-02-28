@@ -1,13 +1,13 @@
-# Comprendere i Puntatori in C++ - Una Lezione Completa di 2 Ore
+# Basi sui puntatori in C++
 
 ## Indice
-1. [Introduzione ai Puntatori (15 minuti)](#introduzione-ai-puntatori)
-2. [Basi dei Puntatori (25 minuti)](#basi-dei-puntatori)
-3. [Puntatori e Array (20 minuti)](#array)
-4. [Aritmetica dei Puntatori (15 minuti)](#aritmetica)
-5. [Puntatori e Funzioni (20 minuti)](#funzioni)
-6. [Allocazione Dinamica della Memoria (15 minuti)](#dinamica)
-7. [Errori Comuni e Buone Pratiche (10 minuti)](#errori)
+1. [Introduzione ai Puntatori](#introduzione-ai-puntatori)
+2. [Basi dei Puntatori](#basi-dei-puntatori)
+3. [Puntatori e Array](#puntatori-e-array)
+4. [Aritmetica dei Puntatori](#aritmetica-dei-puntatori)
+5. [Puntatori e Funzioni](#puntatori-e-funzioni)
+6. [Allocazione Dinamica della Memoria](#allocazione-dinamica-della-memoria)
+7. [Errori Comuni e Buone Pratiche](#errori-comuni-e-buone-pratiche)
 
 ---
 
@@ -160,3 +160,39 @@ int main() {
     return 0;
 }
 ```
+
+### 3. Dereferenziare con l'Operatore *
+
+L'asterisco (\*) quando usato su un puntatore significa "vai a questo indirizzo e prendi il valore"
+
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+    int voto = 28;
+    int* ptr = &voto;  // ptr memorizza l'indirizzo di voto
+
+    cout << "=== DEREFERENZIAMENTO DEI PUNTATORI SPIEGATO ===" << endl;
+    cout << "Variabile originale:" << endl;
+    cout << "  voto = " << voto << endl;
+    cout << "  &voto = " << &voto << " (indirizzo dove vive voto)" << endl;
+    cout << endl;
+
+    cout << "Variabile puntatore:" << endl;
+    cout << "  ptr = " << ptr << " (contiene l'indirizzo di voto)" << endl;
+    cout << "  *ptr = " << *ptr << " (vai all'indirizzo ptr e prendi il valore)" << endl;
+    cout << endl;
+
+    // Modificare attraverso il puntatore
+    cout << "Modificare il valore attraverso il puntatore:" << endl;
+    *ptr = 100;  // "Vai all'indirizzo ptr e imposta quel valore a 100"
+    cout << "  Dopo *ptr = 100:" << endl;
+    cout << "  voto = " << voto << " (variabile originale cambiata!)" << endl;
+    cout << "  *ptr = " << *ptr << " (il puntatore mostra lo stesso valore)" << endl;
+
+    return 0;
+}
+
+```
+
