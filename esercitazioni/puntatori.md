@@ -37,20 +37,20 @@ I puntatori risolvono diverse sfide fondamentali della programmazione:
 ### Layout della Memoria - Il Quadro Generale
 
 La Memoria del tuo Computer:
-┌──────────────────────────┐
-│ Sezione Codice │ ← Istruzioni del programma
-│ (sola lettura) │
-├──────────────────────────┤
-│ Sezione Dati │ ← Variabili globali/statiche
-│ (dati inizializzati) │
-├──────────────────────────┤
-│ Heap │ ← Memoria dinamica (cresce verso l'alto)
-│ ↓ │ (new/malloc)
-│ │
-│ ↑ │
-│ Stack │ ← Variabili locali (cresce verso il basso)
-│ (chiamate funzioni) │
-└──────────────────────────┘
+|----------------------------|
+| Sezione Codice | ← Istruzioni del programma
+| (sola lettura) |
+|----------------------------|
+| Sezione Dati | ← Variabili globali/statiche
+| (dati inizializzati) |
+|----------------------------|
+| Heap | ← Memoria dinamica (cresce verso l'alto)
+| ↓ | (new/malloc)
+| |
+| ↑ |
+| Stack │ ← Variabili locali (cresce verso il basso)
+| (chiamate funzioni) |
+|----------------------------|
 
 Ogni cella di memoria ha:
 
@@ -160,6 +160,8 @@ int main() {
     return 0;
 }
 ```
+
+
 
 ### 3. Dereferenziare con l'Operatore *
 
