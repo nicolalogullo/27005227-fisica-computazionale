@@ -42,7 +42,7 @@ La Memoria del tuo Computer:
 |:---:|:---:|
 | Sezione Codice | Istruzioni |
 | Sezione Dati | Variabili globali e statiche |
-| Stack | Variabili locali/chiamate a funzioni |
+| Stack | Variabili locali, chiamate a funzioni |
 |  Heap | Memoria dinamica (new/malloc) |
 
 
