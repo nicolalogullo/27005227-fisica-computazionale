@@ -38,6 +38,7 @@ I puntatori risolvono diverse sfide fondamentali della programmazione:
 
 La Memoria del tuo Computer:
 
+|Memoria|Funzione|
 |:---:|:---:|
 | Sezione Codice |Istruzioni |
 |Sezione Dati|Variabili globali e statiche|
