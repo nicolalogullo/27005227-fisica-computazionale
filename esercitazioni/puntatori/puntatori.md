@@ -275,3 +275,441 @@ int main() {
 
 ```
 
+## Puntatori e Array
+
+### 1. I nomi degli array come puntatori
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "=== ARRAY E PUNTATORI: LA CONNESSIONE SEGRETA ===" << endl;
+    
+    int arr[] = {10, 20, 30, 40, 50};
+    
+    cout << "Quando crei un array:" << endl;
+    cout << "  int arr[] = {10, 20, 30, 40, 50};" << endl;
+    cout << endl;
+    
+    cout << "Concetto chiave: arr è in realtà un puntatore al primo elemento!" << endl;
+    cout << "  arr = " << arr << " (indirizzo del primo elemento)" << endl;
+    cout << "  &arr[0] = " << &arr[0] << " (stesso indirizzo!)" << endl;
+    cout << endl;
+    
+    cout << "Accedere agli elementi - due modi:" << endl;
+    cout << "  Notazione array: arr[0] = " << arr[0] << endl;
+    cout << "  Notazione puntatore: *arr = " << *arr << endl;
+    cout << "  Notazione array: arr[2] = " << arr[2] << endl;
+    cout << "  Aritmetica puntatori: *(arr + 2) = " << *(arr + 2) << endl;
+    
+    return 0;
+}
+
+```
+### 2. Puntatori agli elementi degli array
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "=== MANIPOLARE ARRAY CON PUNTATORI ===" << endl;
+    
+    int numeri[] = {1, 2, 3, 4, 5};
+    int* ptr = numeri;  // ptr punta al primo elemento
+    
+    cout << "Stato iniziale:" << endl;
+    cout << "  ptr punta a: " << *ptr << " (primo elemento)" << endl;
+    cout << endl;
+    
+    // Muovere il puntatore avanti
+    cout << "Muoversi attraverso l'array:" << endl;
+    
+    ptr++;  // Passa al prossimo intero (4 byte avanti)
+    cout << "  Dopo ptr++: punta a " << *ptr << endl;
+    
+    ptr++;  // Muovi di nuovo
+    cout << "  Dopo un altro ptr++: punta a " << *ptr << endl;
+    cout << endl;
+    
+    // Aritmetica dei puntatori con numeri
+    ptr = numeri;  // Resetta all'inizio
+    cout << "Resettato ptr all'inizio: punta a " << *ptr << endl;
+    cout << endl;
+    
+    cout << "Aggiungere numeri al puntatore:" << endl;
+    cout << "  ptr + 2 punta a: " << *(ptr + 2) << " (terzo elemento)" << endl;
+    cout << "  ptr + 4 punta a: " << *(ptr + 4) << " (quinto elemento)" << endl;
+    
+    return 0;
+}
+
+```
+
+### 3. Array di puntatori 
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "=== MANIPOLARE ARRAY CON PUNTATORI ===" << endl;
+    
+    int numeri[] = {1, 2, 3, 4, 5};
+    int* ptr = numeri;  // ptr punta al primo elemento
+    
+    cout << "Stato iniziale:" << endl;
+    cout << "  ptr punta a: " << *ptr << " (primo elemento)" << endl;
+    cout << endl;
+    
+    // Muovere il puntatore avanti
+    cout << "Muoversi attraverso l'array:" << endl;
+    
+    ptr++;  // Passa al prossimo intero (4 byte avanti)
+    cout << "  Dopo ptr++: punta a " << *ptr << endl;
+    
+    ptr++;  // Muovi di nuovo
+    cout << "  Dopo un altro ptr++: punta a " << *ptr << endl;
+    cout << endl;
+    
+    // Aritmetica dei puntatori con numeri
+    ptr = numeri;  // Resetta all'inizio
+    cout << "Resettato ptr all'inizio: punta a " << *ptr << endl;
+    cout << endl;
+    
+    cout << "Aggiungere numeri al puntatore:" << endl;
+    cout << "  ptr + 2 punta a: " << *(ptr + 2) << " (terzo elemento)" << endl;
+    cout << "  ptr + 4 punta a: " << *(ptr + 4) << " (quinto elemento)" << endl;
+    
+    return 0;
+}
+```
+
+## Aritmentica dei puntatori
+
+### 1. Operazioni aritmentiche di base
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "=== ARITMETICA DEI PUNTATORI: AGGIUNGERE 1 NON SIGNIFICA AGGIUNGERE 1 BYTE ===" << endl;
+    
+    int arr[] = {10, 20, 30, 40, 50};
+    int* ptr = arr;
+    
+    cout << "Concetto chiave: L'aritmetica dei puntatori è consapevole del tipo!" << endl;
+    cout << endl;
+    
+    cout << "Stato iniziale:" << endl;
+    cout << "  ptr = " << ptr << " (indirizzo)" << endl;
+    cout << "  *ptr = " << *ptr << " (valore a quell'indirizzo)" << endl;
+    cout << endl;
+    
+    cout << "Quando facciamo ptr++:" << endl;
+    cout << "  Non aggiunge semplicemente 1 all'indirizzo" << endl;
+    cout << "  Aggiunge sizeof(int) bytes (di solito 4)" << endl;
+    
+    ptr++;
+    cout << "\nDopo ptr++:" << endl;
+    cout << "  ptr = " << ptr << " (indirizzo aumentato di " << sizeof(int) << ")" << endl;
+    cout << "  *ptr = " << *ptr << " (ora punta all'elemento successivo)" << endl;
+    
+    return 0;
+}
+
+```
+
+### 2. Sottrazione e confronto fra puntatori
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "=== SOTTRAZIONE E CONFRONTO TRA PUNTATORI ===" << endl;
+
+    int arr[] = {10, 20, 30, 40, 50, 60, 70};
+    int* inizio = &arr[0];  // Primo elemento
+    int* fine = &arr[6];    // Ultimo elemento
+
+    // Sottrazione tra puntatori
+    cout << "Sottrazione tra puntatori:" << endl;
+    cout << "  inizio punta a: " << *inizio << " (indice 0)" << endl;
+    cout << "  fine punta a: " << *fine << " (indice 6)" << endl;
+    cout << "  fine - inizio = " << (fine - inizio) << " (numero di elementi tra loro)" << endl;
+    cout << "  NON " << ((long)fine - (long)inizio) << " bytes!" << endl;
+    cout << endl;
+
+    // Confronto tra puntatori
+    cout << "Confronto tra puntatori:" << endl;
+    cout << "  inizio < fine? " << (inizio < fine ? "Sì" : "No") << endl;
+
+    return 0;
+}
+```
+
+## Puntatori e Funzioni
+
+### 1. Passaggio per riferimento
+
+```cpp
+#include <iostream>
+using namespace std;
+
+// Funzione che prova a modificare un valore (ma fallisce)
+void incrementaMale(int x) {
+    x++;  // Modifica la COPIA, non l'originale
+    cout << "  Dentro incrementaMale, x ora è: " << x << endl;
+}
+
+// Funzione che modifica con successo il valore usando un puntatore
+void incrementaBene(int* ptr) {
+    (*ptr)++;  // Importante: (*ptr)++ NON *ptr++!
+    cout << "  Dentro incrementaBene, *ptr ora è: " << *ptr << endl;
+}
+
+int main() {
+    cout << "=== PASSAGGIO PER VALORE VS PASSAGGIO PER PUNTATORE ===" << endl;
+    
+    int num = 5;
+    
+    cout << "Num originale: " << num << endl;
+    cout << endl;
+    
+    cout << "Chiamata incrementaMale(num):" << endl;
+    incrementaMale(num);
+    cout << "Dopo incrementaMale, num = " << num << " (invariato!)" << endl;
+    cout << endl;
+    
+    cout << "Chiamata incrementaBene(&num):" << endl;
+    incrementaBene(&num);  // Passa l'indirizzo
+    cout << "Dopo incrementaBene, num = " << num << " (cambiato!)" << endl;
+    
+    return 0;
+}
+```
+
+### 2. Funzioni a volori multipli
+
+```cpp
+#include <iostream>
+using namespace std;
+
+// Funzione che trova sia il minimo che il massimo in un array
+void trovaMinMax(int* arr, int size, int* min, int* max) {
+    *min = *max = arr[0];  // Inizializza con il primo elemento
+
+    for(int i = 1; i < size; i++) {
+        if(arr[i] < *min) *min = arr[i];
+        if(arr[i] > *max) *max = arr[i];
+    }
+}
+
+int main() {
+    cout << "=== RESTITUIRE VALORI MULTIPLI ===" << endl;
+
+    int numeri[] = {34, 12, 56, 78, 23, 45, 67};
+    int size = sizeof(numeri) / sizeof(numeri[0]);
+
+    cout << "Array: ";
+    for(int i = 0; i < size; i++) cout << numeri[i] << " ";
+    cout << endl;
+
+    int minVal, maxVal;
+    trovaMinMax(numeri, size, &minVal, &maxVal);
+
+    cout << "Risultati: Min = " << minVal << ", Max = " << maxVal << endl;
+
+    return 0;
+}
+```
+### 3. Puntatore a puntatore
+
+```cpp
+#include <iostream>
+using namespace std;
+
+// Funzione che alloca memoria e modifica il puntatore stesso
+void allocaArray(int** ptr, int size) {
+    *ptr = new int[size];  // Questo cambia il puntatore originale!
+
+    // Inizializza i valori
+    for(int i = 0; i < size; i++) {
+        (*ptr)[i] = (i + 1) * 10;
+    }
+
+    cout << "  Array allocato all'indirizzo: " << *ptr << endl;
+}
+
+int main() {
+    cout << "=== DOPPI PUNTATORI: PUNTATORI A PUNTATORI ===" << endl;
+
+    int* arrayPtr = nullptr;  // Il nostro puntatore che vogliamo modificare
+
+    cout << "Prima dell'allocazione:" << endl;
+    cout << "  arrayPtr = " << arrayPtr << " (nullo)" << endl;
+    cout << endl;
+
+    cout << "Chiamata allocaArray(&arrayPtr, 5):" << endl;
+    allocaArray(&arrayPtr, 5);  // Passa l'indirizzo del nostro puntatore
+
+    cout << "\nDopo l'allocazione:" << endl;
+    cout << "  arrayPtr = " << arrayPtr << " (ora punta a memoria valida)" << endl;
+    cout << "  Valori: ";
+    for(int i = 0; i < 5; i++) {
+        cout << arrayPtr[i] << " ";
+    }
+    cout << endl;
+
+    // Pulizia
+    delete[] arrayPtr;
+
+    return 0;
+}
+```
+
+## Allocazione dinamica della memoria
+
+### 1. Operatori "new" e "delete"
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "=== ALLOCAZIONE DINAMICA DELLA MEMORIA: LO HEAP ===" << endl;
+
+    cout << "Concetto chiave: Due tipi di memoria:" << endl;
+    cout << "  Stack: Variabili locali (automatiche, dimensione limitata)" << endl;
+    cout << "  Heap:  Allocate dinamicamente (manuali, possono essere grandi)" << endl;
+    cout << endl;
+
+    // Allocazione di una singola variabile
+    cout << "1. Allocare un singolo intero:" << endl;
+    int* ptr = new int;  // Richiede memoria dallo heap
+    cout << "   new int restituisce indirizzo: " << ptr << endl;
+
+    *ptr = 42;  // Memorizza il valore nella memoria dello heap
+    cout << "   Memorizzato " << *ptr << " a quell'indirizzo" << endl;
+    cout << endl;
+
+    cout << "2. Bisogna fare delete quando si finisce:" << endl;
+    delete ptr;  // Restituisce la memoria allo heap
+    ptr = nullptr;
+    cout << endl;
+
+    // Allocazione di un array
+    cout << "3. Allocare un array:" << endl;
+    int size = 5;
+    int* arr = new int[size];  // Alloca array sullo heap
+
+    // Inizializza l'array
+    for(int i = 0; i < size; i++) {
+        arr[i] = (i + 1) * 10;
+    }
+
+    cout << "   Valori memorizzati: ";
+    for(int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+    cout << endl;
+
+    cout << "4. Cancellazione dell'array:" << endl;
+    cout << "   Bisogna usare delete[] (con le parentesi!) per gli array" << endl;
+    delete[] arr;  // Libera la memoria dell'array
+    arr = nullptr;
+
+    return 0;
+}
+```
+
+## 2. Array 2D Dinamici
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "=== ARRAY 2D DINAMICI ===" << endl;
+    
+    int righe = 3, colonne = 4;
+    
+    cout << "Creazione di una matrice " << righe << "x" << colonne << ":" << endl;
+    cout << endl;
+    
+    // Passo 1: Alloca array di puntatori (righe)
+    cout << "Passo 1: Alloca i puntatori alle righe" << endl;
+    int** matrice = new int*[righe];
+    cout << endl;
+    
+    // Passo 2: Alloca ogni riga
+    cout << "Passo 2: Alloca ogni riga" << endl;
+    for(int i = 0; i < righe; i++) {
+        matrice[i] = new int[colonne];
+    }
+    cout << endl;
+    
+    // Inizializza la matrice
+    int valore = 1;
+    for(int i = 0; i < righe; i++) {
+        for(int j = 0; j < colonne; j++) {
+            matrice[i][j] = valore++;
+        }
+    }
+    
+    // Stampa la matrice
+    cout << "Matrice risultante:" << endl;
+    for(int i = 0; i < righe; i++) {
+        cout << "   Riga " << i << ": ";
+        for(int j = 0; j < colonne; j++) {
+            cout << matrice[i][j] << "\t";
+        }
+        cout << endl;
+    }
+    cout << endl;
+    
+    // Passo 4: Liberare la memoria (importante!)
+    cout << "Passo 4: Liberare la memoria (in ordine inverso)" << endl;
+    for(int i = 0; i < righe; i++) {
+        delete[] matrice[i];  // Cancella ogni riga
+    }
+    delete[] matrice;  // Cancella l'array di puntatori
+    
+    return 0;
+}
+
+```
+
+### 3. Dimostrazione Memory
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "\n=== DIMOSTRAZIONE DI MEMORY LEAK ===" << endl;
+
+    cout << "Esempio 1: Dimenticare di fare delete" << endl;
+    cout << "  int* ptr = new int(100);" << endl;
+    cout << "  // ... del codice ..." << endl;
+    cout << "  // Dimenticato: delete ptr;" << endl;
+    cout << "  Risultato: La memoria rimane allocata fino alla fine del programma" << endl;
+
+    cout << "\nEsempio 2: Perdere il puntatore" << endl;
+    cout << "  int* ptr = new int(100);" << endl;
+    cout << "  ptr = new int(200);  // Sovrascrive senza cancellare il primo!" << endl;
+    cout << "  // La prima allocazione (100) è persa per sempre!" << endl;
+
+    cout << "\nEsempio 3: Il puntatore esce dallo scope" << endl;
+    cout << "  if(true) {" << endl;
+    cout << "      int* ptr = new int(100);" << endl;
+    cout << "  }  // ptr esce dallo scope, ma la memoria non è liberata!" << endl;
+    cout << "  // Non c'è modo di accedere a quella memoria ora - LEAK!" << endl;
+
+    return 0;
+}
+```
