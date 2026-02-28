@@ -37,7 +37,7 @@ I puntatori risolvono diverse sfide fondamentali della programmazione:
 ### Layout della Memoria - Il Quadro Generale
 
 La Memoria del tuo Computer:
-
+|---|
 | Sezione Codice <br/> |              ← Istruzioni del programma|
  (sola lettura) 
 |
