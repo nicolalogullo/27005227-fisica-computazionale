@@ -38,9 +38,12 @@ I puntatori risolvono diverse sfide fondamentali della programmazione:
 
 La Memoria del tuo Computer:
 
-| Sezione Codice | Sezione Dati| Stack │  Heap |
-|---|---|---|---|
-| | | | |
+|:---:|:---:|
+| Sezione Codice |Istruzioni |
+|Sezione Dati|Variabili globali e statiche|
+| Stack │ Variabili locali/chiamate a funzioni|
+|  Heap |Memoria dinamica (new/malloc)|
+
 
 Ogni cella di memoria ha:
 
