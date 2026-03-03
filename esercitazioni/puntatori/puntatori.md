@@ -125,8 +125,7 @@ int main() {
     cout << "  Nota:    Cast speciale necessario per char* per stampare come indirizzo" << endl;
 
     return 0;
-}#include <iostream>
-using namespace std;
+}
 
 ```
 
