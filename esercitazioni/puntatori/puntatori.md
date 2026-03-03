@@ -128,31 +128,6 @@ int main() {
 }#include <iostream>
 using namespace std;
 
-int main() {
-    int numero = 42;
-    double prezzo = 99.99;
-    char lettera = 'A';
-
-    cout << "=== COMPRENDERE GLI INDIRIZZI ===" << endl;
-    cout << "Variabile: numero" << endl;
-    cout << "  Valore:  " << numero << endl;
-    cout << "  Indirizzo: " << &numero << " (esadecimale)" << endl;
-    cout << "  Nota:    Gli indirizzi sono solitamente mostrati in esadecimale" << endl;
-    cout << endl;
-
-    cout << "Variabile: prezzo" << endl;
-    cout << "  Valore:  " << prezzo << endl;
-    cout << "  Indirizzo: " << &prezzo << endl;
-    cout << "  Nota:    Variabili diverse hanno indirizzi diversi" << endl;
-    cout << endl;
-
-    cout << "Variabile: lettera" << endl;
-    cout << "  Valore:  " << lettera << endl;
-    cout << "  Indirizzo: " << (void*)&lettera << endl;
-    cout << "  Nota:    Cast speciale necessario per char* per stampare come indirizzo" << endl;
-
-    return 0;
-}
 ```
 
 
